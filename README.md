@@ -1,6 +1,6 @@
 # capture
 
-## This is a website project contains client based on React and server based on NodeJS.
+## This is a 'share photo blog' social website that has photo blog publishing, blog searching and user registration features. The website project contains client based on React and server based on NodeJS.
 
 ## How to run the website
 
