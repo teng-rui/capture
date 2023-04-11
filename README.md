@@ -10,6 +10,6 @@
 
 3. follow the introduction in /client/readme to start client
 
-4. add a .env under /capture/server, set your secret 'SECRET=yoursecret' and mongodb url
+4. add a .env under /capture/server, set your secret 'SECRET=yoursecret' and mongodb url 'DATABASE=yourURL'
 
 5. run node index.js in terminal to strat server 
