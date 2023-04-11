@@ -1,7 +1,8 @@
+require("dotenv").config();
 const mongoose = require("mongoose");
 
 mongoose.set('strictQuery', false);
-const dbURL = "mongodb+srv://ruiteng:TENG707298rui@cluster0.lpat5su.mongodb.net/captureDB";
+const dbURL = process.env.DATABASE;
 mongoose.connect(dbURL, { useNewUrlParser: true });
 
 const plogSchema = new mongoose.Schema({
