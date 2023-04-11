@@ -3,6 +3,8 @@ import axios from 'axios';
 
 function Register() {
 
+    // send request to restful API process.env.REACT_APP_SERVER + "/register"
+
 
     async function handleSubmit() {
         let username = document.getElementById('inputEmail').value;
@@ -17,8 +19,7 @@ function Register() {
         else {
 
             let formData='username='+username+'&password='+password;
-
-
+            
             let xhttp = new XMLHttpRequest();
             xhttp.open("POST", process.env.REACT_APP_SERVER + "/register");
             xhttp.onload = function () {

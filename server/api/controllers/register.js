@@ -1,6 +1,9 @@
 const User = require(__dirname + '/../models/captureDB.js').User;
 const bcrypt = require("bcrypt");
 
+//check if username exists in database
+//if not bcrypt password and save to database
+
 async function func(req, res, next) {
     let username = req.body.username;
     let password = req.body.password;

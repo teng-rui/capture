@@ -5,10 +5,16 @@ import axios from 'axios';
 
 function UploadForm() {
 
+    // the main three components are input[type='file' id="upload_file"] that accepts images,
+    // input[type='text' id='title'], and input[type='text' id='description'] 
+    // function handleUploadChange check the uploaded file type, and only store at most 9 files with extension in ['gif', 'png', 'jpg', 'jpeg']
+    // function handleDelete delete corresponding image from imageSRC
+    // function handleUpload send formdata to restAPI process.env.REACT_APP_SERVER + "/plog"
+
+
     const [errorMessage, set_errorMessage] = useState("");
     const [uploading, setUploading] = useState(false);
     const [show, setShow] = useState(false);
-    // const [image, setImage] = useState(false);
     const [imageSRC, setImageSRC] = useState([]);
     const [imageID, setImageID] = useState(0);
 
@@ -34,7 +40,6 @@ function UploadForm() {
 
     function handleUploadChange(e) {
         var ext = e.target.value.split('.').pop().toLowerCase();
-
         if (imageSRC.length >= 9) {
             set_errorMessage('9 Pictures At Most');
         }
@@ -43,6 +48,7 @@ function UploadForm() {
         else if (!['gif', 'png', 'jpg', 'jpeg'].includes(ext)) {
             set_errorMessage('Not An Image');
         }
+
         else {
             set_errorMessage("");
             setUploading(true);
@@ -100,15 +106,17 @@ function UploadForm() {
                 }).then(result => result.data)
                     .then((result) => {
                         console.log(result);
+
                         // alert(result.message);
-                        // if(result.message=='successfully posted'){
-                        //     // window.location.assign('/post/'+result.id);
+                        if(result.message=='successfully posted'){
+                            window.location.assign('/');
+                        }
                         //     window.location.assign('/post/123')
                         // }
 
                     })
             }
-            else{
+            else {
                 window.location.assign('/login');
             }
 
@@ -117,39 +125,38 @@ function UploadForm() {
 
 
 
-        return (
+    return (
 
-
-            <div className="panel">
-                <div className={'button_outer ' + (uploading ? 'file_uploading ' : ' ')}>
-                    <div className="btn_upload">
-                        <input onChange={handleUploadChange} type="file" id="upload_file" name="picFiles" required></input>
-                        Upload Image
-                    </div>
-                    <div className="processing_bar"></div>
+        <div className="panel">
+            <div className={'button_outer ' + (uploading ? 'file_uploading ' : ' ')}>
+                <div className="btn_upload">
+                    <input onChange={handleUploadChange} type="file" id="upload_file" name="picFiles" required></input>
+                    Upload Image
                 </div>
-                <div className="error_msg">{errorMessage}</div>
+                <div className="processing_bar"></div>
+            </div>
+            <div className="error_msg">{errorMessage}</div>
 
-                <div className={"uploaded_file_view " + (show ? 'show ' : ' ')} id="uploaded_view">
+            <div className={"uploaded_file_view " + (show ? 'show ' : ' ')} id="uploaded_view">
 
-                    {imageSRC.map(createImage)}
-                    {/* <Image imageSRC={imageSRC[0]} /> */}
-                    {/* {image ? <img src={imageSRC} /> : <br />} */}
-                </div>
-
-
-                <form className='px-5'>
-                    <label htmlFor="title">Title</label>
-                    <input type='text' id='title' className="form-control mb-3" name='title' placeholder="Title" required="required"></input>
-                    <label htmlFor="description">Description</label>
-                    <textarea id="description" name="description" className="form-control mb-3" placeholder="" rows="10" required="required" data-error="Please leave some description :)"></textarea>
-                    <button type='button' className='rounded' onClick={handleUpload}>Submit</button>
-                </form>
+                {imageSRC.map(createImage)}
+                {/* <Image imageSRC={imageSRC[0]} /> */}
+                {/* {image ? <img src={imageSRC} /> : <br />} */}
             </div>
 
-        )
 
-    }
+            <form className='px-5'>
+                <label htmlFor="title">Title</label>
+                <input type='text' id='title' className="form-control mb-3" name='title' placeholder="Title" required="required"></input>
+                <label htmlFor="description">Description</label>
+                <textarea id="description" name="description" className="form-control mb-3" placeholder="" rows="10" required="required" data-error="Please leave some description :)"></textarea>
+                <button type='button' className='rounded' onClick={handleUpload}>Submit</button>
+            </form>
+        </div>
 
-    export default UploadForm;
+    )
+
+}
+
+export default UploadForm;
 

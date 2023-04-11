@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 function Login() {
 
 
+    //check form input, username and password required
+    //send request to server domain, and save token to local storage if get 'tokenSigned' response message
     function handleSubmit(){
         let username = document.getElementById('inputEmail').value;
         let password = document.getElementById('inputPassword').value;
@@ -16,7 +18,6 @@ function Login() {
         else {
 
             let formData='username='+username+'&password='+password;
-
 
             let xhttp = new XMLHttpRequest();
             xhttp.open("POST", process.env.REACT_APP_SERVER + "/login");

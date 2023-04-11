@@ -1,6 +1,9 @@
 const User = require(__dirname + '/../models/captureDB.js').User;
 const bcrypt = require("bcrypt");
 
+// check if user exsits and compare bcrypt password with database,
+// if comparison returns true, response token,
+// otherwise response error message.
 
 async function func(req, res,next) {
   let username = req.body.username;
